@@ -1,21 +1,34 @@
 frequencies = open('input.txt')
 output = open("output.txt", 'w')
 
-# freq_sum = 0
-#
-# for line in frequencies:
-#
-#     freq = line[1:]
-#     if line[0] == '+':
-#         freq_sum += int(freq)
-#     else:
-#         freq_sum -= int(freq)
-#
-# output.write(str(freq_sum))
-# print(freq_sum)
 
-# Comprehension
+# PART 1
 
-freq_list = [int(line[1:]) if line[0] == '+' else -1*int(line[1:]) for line in frequencies]
-print(sum(freq_list))
-output.write(str(sum(freq_list)))
+
+freq_sum = sum([int(freq) for freq in frequencies])
+print(freq_sum)
+output.write(str(freq_sum))
+frequencies.seek(0)
+
+#PART 2
+
+#Testdata
+test_input_1 = ['+1', '-1']
+test_input_2 = ['+3', '+3', '+4', '-2', '-4']
+test_input_3 = ['-6', '+3', '+8', '+5', '-6']
+test_input_4 = ['+7', '+7', '-2', '-7', '-4']
+
+freq_current = 0
+freq_list = [0]
+not_finished = 1
+while not_finished :
+    for freq in frequencies:
+        freq_current += int(freq)
+        freq_list.append(freq_current)
+        #print(set(freq_list).symmetric_difference(freq_list))
+        if len(freq_list) != len(set(freq_list)):
+            not_finished = 0
+            break
+    frequencies.seek(0)
+
+print(freq_list[-1])
