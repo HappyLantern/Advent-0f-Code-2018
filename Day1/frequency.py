@@ -26,7 +26,7 @@ while not_finished :
         freq_current += int(freq)
         freq_list.append(freq_current)
         #print(set(freq_list).symmetric_difference(freq_list))
-        if len(freq_list) != len(set(freq_list)):
+        if len(freq_list) != len(set(freq_list)): #This takes time, make dictionary instead and check when some value > 1
             not_finished = 0
             break
     frequencies.seek(0)
