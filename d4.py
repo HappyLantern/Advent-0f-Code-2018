@@ -1,14 +1,13 @@
+# Advent of code day 4
+
+
 # Part 1
 # What is the ID of the guard you chose multiplied by the minute you chose?
-input = open('input.txt')
-sorted_input = open('sorted_input.txt', 'w')
-
-
-# Sort input by timestamps
+input = open('d4_input.txt')
+sorted_input = open('d4_sorted_input.txt', 'w')
 notes = dict()
 total_sleeptime = dict()
 total_sleeptime_by_minute = dict(list())
-
 for note in input:
     time = note[1:5] + note[6:8] + note[9:11] + note[12:14] + note[15:17]
     time = int(''.join(time))
@@ -16,10 +15,10 @@ for note in input:
 
 for key in sorted(notes.keys()):
     sorted_input.write(str(key) + " " + notes[key])
-
+sorted_input.close()
 
 # Calculate minutes of sleeping
-sorted_input = open('sorted_input.txt') # Open for reading
+sorted_input = open('d4_sorted_input.txt') # Open for reading
 guard_id   = "" # Init value
 sleep_time = -1 # Init value
 wake_time  = -1 # Init value
@@ -46,7 +45,6 @@ for note in sorted_input:
             for i in range(sleep_time, wake_time):
                 total_sleeptime_by_minute[guard_id][i] = 1
 
-
 # Get guard with most minutes slept
 sleepy_guard  = -1 # Init value
 minutes_slept = 0  # Init value
@@ -54,8 +52,6 @@ for guard_id in total_sleeptime:
     if minutes_slept < total_sleeptime[guard_id]:
         sleepy_guard = guard_id
         minutes_slept = total_sleeptime[guard_id]
-print(sleepy_guard)
-
 
 #Get the minute where the guard slept the most
 index     = -1 # Init value
