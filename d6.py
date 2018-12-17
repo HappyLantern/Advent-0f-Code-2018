@@ -51,7 +51,6 @@ for coordinate in shortest_distance:
         area[shortest_distance[coordinate]] = 1
 
 for k in inf_area_dest: # Remove infinite area destinations
-    print(k)
     area.pop(k, None)
     area.pop((-1, -1), None)
 max_area = max(area.values())
@@ -61,3 +60,11 @@ print(max_area) # Answer for part 1
 # Part 2
 # What is the size of the region containing all locations which
 # have a total distance to all given coordinates of less than 10000?
+max_distance = 10000
+size = 0
+for x in range(min_x, max_x):
+    for y in range(min_y, max_y):
+        total_distance = sum([abs(x - dest[0]) + abs(y - dest[1]) for dest in destinations])
+        if total_distance < max_distance:
+            size += 1
+print(size) # Answer for part 2
